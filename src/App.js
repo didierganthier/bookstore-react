@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 import {
   Route,
   Routes,
-} from "react-router-dom";
-import Books from "./pages/Books";
-import Categories from "./pages/Categories";
+} from 'react-router-dom';
+import Books from './pages/Books';
+import Categories from './pages/Categories';
 
 export default function App() {
   return (
