@@ -15,6 +15,7 @@ const InputForm = () => {
       id: uuidv4(),
       title,
       author,
+      progress: 'currently reading',
     }));
     setTitle('');
     setAuthor('');

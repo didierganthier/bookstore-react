@@ -55,5 +55,19 @@ const toggleBook = (id) => ({
   payload: id,
 });
 
+const visibilityFilter = (
+  state = 'SHOW_ALL',
+  action,
+) => {
+  switch (action.type) {
+    case 'CHANGE_FILTER':
+      return action.filter;
+    default:
+      return state;
+  }
+};
+
 export default bookReducer;
-export { addBook, removeBook, toggleBook };
+export {
+  addBook, removeBook, toggleBook, visibilityFilter,
+};
