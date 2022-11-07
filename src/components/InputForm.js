@@ -1,33 +1,32 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
+import { addBook } from '../redux/books/books';
 
-const InputForm = (props) => {
-  const { setBooks, books } = props;
+const InputForm = () => {
+  const dispatch = useDispatch();
 
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
 
-  const addBook = (e) => {
+  const submitAddBook = (e) => {
     e.preventDefault();
-    const newBook = {
+    dispatch(addBook({
+      id: uuidv4(),
       title,
       author,
-    };
-    setBooks([...books, newBook]);
+    }));
+    setTitle('');
+    setAuthor('');
   };
 
   return (
     <form onSubmit={(e) => addBook(e)}>
-      <input type="text" onChange={(e) => setTitle(e.target.value)} placeholder="Title" />
-      <input type="text" onChange={(e) => setAuthor(e.target.value)} placeholder="Author" />
-      <button type="submit" onClick={(e) => addBook(e)}>Add</button>
+      <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" />
+      <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} placeholder="Author" />
+      <button type="submit" onClick={(e) => submitAddBook(e)}>Add</button>
     </form>
   );
-};
-
-InputForm.propTypes = {
-  books: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
-  setBooks: PropTypes.func.isRequired,
 };
 
 export default InputForm;

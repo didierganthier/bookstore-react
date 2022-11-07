@@ -25,3 +25,16 @@ code {
     'Courier New',
     monospace;
 }
+
+.books {
+  display: flex;
+  flex-direction: row;
+  margin: 0%;
+  padding: 0%;
+}
+
+.books li {
+  list-style: none;
+  padding-left: 20px;
+  cursor: pointer;
+}

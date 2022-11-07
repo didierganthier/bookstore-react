@@ -1,20 +1,24 @@
-const ADD_BOOK = 'book-store/books/ADD_BOOK';
-const REMOVE_BOOK = 'book-store/books/REMOVE_BOOK';
+const ADD_BOOK = 'bookstore/books/ADD_BOOK';
+const REMOVE_BOOK = 'bookstore/books/REMOVE_BOOK';
+const TOGGLE_BOOK = 'bookstore/books/TOGGLE_BOOK';
 const initialState = [
   {
     id: '1',
-    title: 'title 1',
-    author: 'author 1',
+    title: 'The Alchemist',
+    author: 'Paulo Coelho',
+    progress: 'read',
   },
   {
     id: '2',
-    title: 'title 2',
-    author: 'author 2',
+    title: 'The Little Prince',
+    author: 'Antoine de Saint-Exupéry',
+    progress: 'currently reading',
   },
   {
     id: '3',
-    title: 'title 3',
-    author: 'author 3',
+    title: 'The Prophet',
+    author: 'Kahlil Gibran',
+    progress: 'currently reading',
   },
 ];
 
@@ -22,6 +26,16 @@ const bookReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_BOOK:
       return [...state, action.payload];
+    case TOGGLE_BOOK:
+      return state.map((book) => {
+        if (book.id === action.payload) {
+          return {
+            ...book,
+            progress: book.progress === 'read' ? 'currently reading' : 'read',
+          };
+        }
+        return book;
+      });
     case REMOVE_BOOK:
       return state.filter((item) => item.id !== action.payload);
     default: return state;
@@ -36,5 +50,10 @@ const removeBook = (id) => ({
   payload: id,
 });
 
+const toggleBook = (id) => ({
+  type: TOGGLE_BOOK,
+  payload: id,
+});
+
 export default bookReducer;
-export { addBook, removeBook };
+export { addBook, removeBook, toggleBook };
