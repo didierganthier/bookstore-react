@@ -36,3 +36,14 @@ code {
   padding-left: 20px;
   cursor: pointer;
 }
+
+.filters {
+  display: flex;
+  flex-direction: row;
+}
+
+.filters li {
+  list-style: none;
+  padding-left: 20px;
+  cursor: pointer;
+}

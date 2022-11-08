@@ -7,18 +7,21 @@ const initialState = [
     title: 'The Alchemist',
     author: 'Paulo Coelho',
     progress: 'read',
+    categories: ['All', 'Learning'],
   },
   {
     id: '2',
     title: 'The Little Prince',
     author: 'Antoine de Saint-Exupéry',
     progress: 'currently reading',
+    categories: ['All', 'Learning'],
   },
   {
     id: '3',
     title: 'The Prophet',
     author: 'Kahlil Gibran',
     progress: 'currently reading',
+    categories: ['All', 'Philosophy'],
   },
 ];
 
