@@ -39,14 +39,16 @@ const Books = () => {
         ))}
       </ul>
       <ul>
-        {/* Filter books where categories contain current filter */}
-        {books.map((book) => (
+        {/* Return no books text if there are no books */}
+        {books.length === 0 && <h1>No books</h1>}
+        {/* Return books if there are books */}
+        {books.length > 0 && books.map((book) => (
           <Book
             key={book.item_id}
             id={book.item_id}
             title={book.title}
             author={book.author}
-            progress={book.progress}
+            category={book.category}
           />
         ))}
       </ul>
