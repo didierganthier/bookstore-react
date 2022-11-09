@@ -7,6 +7,7 @@
 
 ## Built With
 - React
+- Redux
 - Linters
 
 
