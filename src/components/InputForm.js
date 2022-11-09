@@ -26,12 +26,7 @@ export default function InputForm() {
     } = book;
     dispatch(postBook(item_id, title, author, category))
       .then(() => {
-        setBook({
-          item_id: uuidv4(),
-          title,
-          author,
-          category: 'under construction',
-        });
+        setBook(initialBookState);
       });
   };
 

@@ -8,13 +8,9 @@ const Books = () => {
   const books = useSelector((state) => state.rootReducer.books);
   const dispatch = useDispatch();
 
-  const getAllBooks = () => {
-    dispatch(getBooks());
-  };
-
   useEffect(() => {
-    getAllBooks();
-  }, []);
+    dispatch(getBooks());
+  }, [dispatch]);
 
   const [filter, setFilter] = useState('All');
 
