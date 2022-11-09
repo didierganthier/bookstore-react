@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux/es/exports';
 import { v4 as uuidv4 } from 'uuid';
 // import { addBook } from '../redux/books/books';
-import { createBook } from '../redux/actions/books';
+import { postBook } from '../redux/actions/books';
 
 const initialBookState = {
   item_id: `${uuidv4()}`,
@@ -24,18 +24,14 @@ export default function InputForm() {
     const {
       item_id, title, author, category,
     } = book;
-    dispatch(createBook(item_id, title, author, category))
-      .then((data) => {
+    dispatch(postBook(item_id, title, author, category))
+      .then(() => {
         setBook({
           item_id: uuidv4(),
           title,
           author,
           category: 'under construction',
         });
-        console.log(data);
-      })
-      .catch((e) => {
-        console.log(e);
       });
   };
 

@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Book from '../components/Book';
 import InputForm from '../components/InputForm';
-import { listAllBooks } from '../redux/actions/books';
+import { getBooks } from '../redux/actions/books';
 
 const Books = () => {
   const books = useSelector((state) => state.rootReducer.books);
   const dispatch = useDispatch();
 
   const getAllBooks = () => {
-    dispatch(listAllBooks());
+    dispatch(getBooks());
   };
 
   useEffect(() => {
@@ -46,8 +46,8 @@ const Books = () => {
         {/* Filter books where categories contain current filter */}
         {books.map((book) => (
           <Book
-            key={book.id}
-            id={book.id}
+            key={book.item_id}
+            id={book.item_id}
             title={book.title}
             author={book.author}
             progress={book.progress}

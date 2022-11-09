@@ -2,7 +2,7 @@ import { ADD_BOOK, DELETE_BOOK, LIST_BOOK } from './types';
 import bookService from '../../services/services';
 
 /* eslint-disable camelcase */
-export const createBook = (item_id, title, author, category) => async (dispatch) => {
+export const postBook = (item_id, title, author, category) => async (dispatch) => {
   try {
     const res = await bookService.create({
       item_id, title, author, category,
@@ -19,7 +19,7 @@ export const createBook = (item_id, title, author, category) => async (dispatch)
   }
 };
 
-export const listAllBooks = () => async (dispatch) => {
+export const getBooks = () => async (dispatch) => {
   try {
     const res = await bookService.getAll();
     const payLoad = Object.keys(res.data).map((valu) => ({
@@ -31,7 +31,7 @@ export const listAllBooks = () => async (dispatch) => {
       payload: payLoad,
     });
   } catch (err) {
-    console.log(err);
+    throw new Error(err);
   }
 };
 
@@ -42,7 +42,8 @@ export const deleteBook = (id) => async (dispatch) => {
       type: DELETE_BOOK,
       payload: { id },
     });
+    dispatch(getBooks());
   } catch (err) {
-    console.log(err);
+    throw new Error(err);
   }
 };
