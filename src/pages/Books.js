@@ -42,7 +42,16 @@ const Books = () => {
         {/* Return no books text if there are no books */}
         {books.length === 0 && <h1>No books</h1>}
         {/* Return books if there are books */}
-        {books.length > 0 && books.map((book) => (
+        {books.length > 0 && filter === 'All' && books.map((book) => (
+          <Book
+            key={book.item_id}
+            id={book.item_id}
+            title={book.title}
+            author={book.author}
+            category={book.category}
+          />
+        ))}
+        {books.length > 0 && filter !== 'All' && books.filter((book) => book.category === filter).map((book) => (
           <Book
             key={book.item_id}
             id={book.item_id}

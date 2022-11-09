@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux/es/exports';
 import { v4 as uuidv4 } from 'uuid';
+import categories from '../data/categories';
 // import { addBook } from '../redux/books/books';
 import { postBook } from '../redux/actions/books';
 
@@ -8,7 +9,7 @@ const initialBookState = {
   item_id: `${uuidv4()}`,
   title: '',
   author: '',
-  category: 'under Construction',
+  category: 'Learning',
 };
 
 export default function InputForm() {
@@ -48,6 +49,13 @@ export default function InputForm() {
         name="author"
         onChange={handleInputChange}
       />
+      <select name="category" id="categories" onChange={handleInputChange}>
+        {categories.map((category) => (
+          <option key={category.id} value={category.name}>
+            {category.name}
+          </option>
+        ))}
+      </select>
       <button type="button" onClick={saveBook}>ADD BOOK</button>
     </form>
   );
