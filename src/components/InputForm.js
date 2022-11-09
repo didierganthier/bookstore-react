@@ -1,43 +1,63 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux/es/exports';
 import { v4 as uuidv4 } from 'uuid';
-import categories from '../data/categories';
-import { addBook } from '../redux/books/books';
+// import { addBook } from '../redux/books/books';
+import { createBook } from '../redux/actions/books';
 
-const InputForm = () => {
+const initialBookState = {
+  item_id: `${uuidv4()}`,
+  title: '',
+  author: '',
+  category: 'under Construction',
+};
+
+export default function InputForm() {
+  const [book, setBook] = useState(initialBookState);
   const dispatch = useDispatch();
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setBook({ ...book, [name]: value });
+  };
 
-  const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState('');
-  const [category, setCategory] = useState('Learning');
-
-  const submitAddBook = (e) => {
-    e.preventDefault();
-    dispatch(addBook({
-      id: uuidv4(),
-      title,
-      author,
-      progress: 'currently reading',
-      categories: ['All', category],
-    }));
-    setTitle('');
-    setAuthor('');
+  const saveBook = () => {
+    /* eslint-disable camelcase */
+    const {
+      item_id, title, author, category,
+    } = book;
+    dispatch(createBook(item_id, title, author, category))
+      .then((data) => {
+        setBook({
+          item_id: uuidv4(),
+          title,
+          author,
+          category: 'under construction',
+        });
+        console.log(data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (
-    <form onSubmit={(e) => addBook(e)}>
-      <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" />
-      <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} placeholder="Author" />
-      <select name="categories" id="categories" onChange={(e) => setCategory(e.target.value)}>
-        {categories.map((category) => (
-          <option key={category.id} value={category.name}>
-            {category.name}
-          </option>
-        ))}
-      </select>
-      <button type="submit" onClick={(e) => submitAddBook(e)}>Add</button>
+    <form>
+      <input
+        type="text"
+        value={book.title || ''}
+        className="input-text"
+        placeholder="Title"
+        name="title"
+        onChange={handleInputChange}
+      />
+      <input
+        type="text"
+        value={book.author || ''}
+        className="input-text"
+        placeholder="Author"
+        name="author"
+        onChange={handleInputChange}
+      />
+      <button type="button" onClick={saveBook}>ADD BOOK</button>
     </form>
   );
-};
-
-export default InputForm;
+}

@@ -3,20 +3,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { removeBook, toggleBook } from '../redux/books/books';
+import { deleteBook } from '../redux/actions/books';
 
 const Book = (props) => {
   const {
     id, title, author, progress,
   } = props;
   const dispatch = useDispatch();
+
+  const removeBookwithId = (id) => {
+    dispatch(deleteBook(id));
+  };
+
   return (
     <li key={id}>
       <h1>{title}</h1>
       <h2>{author}</h2>
-      <input checked={progress === 'read'} type="checkbox" onClick={() => dispatch(toggleBook(id))} />
       <h3>{progress}</h3>
-      <button type="button" onClick={() => dispatch(removeBook(id))}>Remove</button>
+      <button type="button" onClick={() => dispatch(removeBookwithId(id))}>Remove</button>
     </li>
   );
 };
