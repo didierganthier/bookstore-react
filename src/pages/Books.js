@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Book from '../components/Book';
 import InputForm from '../components/InputForm';
+import { getBooks } from '../redux/actions/books';
 
 const Books = () => {
-  const books = useSelector((configureStore) => configureStore.book);
+  const books = useSelector((state) => state.rootReducer.books);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getBooks());
+  }, [dispatch]);
 
   const [filter, setFilter] = useState('All');
 
@@ -33,14 +39,25 @@ const Books = () => {
         ))}
       </ul>
       <ul>
-        {/* Filter books where categories contain current filter */}
-        {books.filter((book) => book.categories.includes(filter)).map((book) => (
+        {/* Return no books text if there are no books */}
+        {books.length === 0 && <h1>No books</h1>}
+        {/* Return books if there are books */}
+        {books.length > 0 && filter === 'All' && books.map((book) => (
           <Book
-            key={book.id}
-            id={book.id}
+            key={book.item_id}
+            id={book.item_id}
             title={book.title}
             author={book.author}
-            progress={book.progress}
+            category={book.category}
+          />
+        ))}
+        {books.length > 0 && filter !== 'All' && books.filter((book) => book.category === filter).map((book) => (
+          <Book
+            key={book.item_id}
+            id={book.item_id}
+            title={book.title}
+            author={book.author}
+            category={book.category}
           />
         ))}
       </ul>

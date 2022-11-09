@@ -1,10 +1,19 @@
-import { configureStore } from '@reduxjs/toolkit';
-import bookReducer from './books/books';
-import categoriesReducer from './categories/categories';
+import { configureStore, applyMiddleware } from '@reduxjs/toolkit';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
+import rootReducer from './reducers';
+// import bookReducer from './books/books';
+// import categoriesReducer from './categories/categories';
 
-export default configureStore({
-  reducer: {
-    book: bookReducer,
-    category: categoriesReducer,
+const initialState = {};
+const middleware = [thunk];
+
+export default configureStore(
+  {
+    reducer: {
+      rootReducer,
+    },
   },
-});
+  initialState,
+  composeWithDevTools(applyMiddleware(...middleware)),
+);
