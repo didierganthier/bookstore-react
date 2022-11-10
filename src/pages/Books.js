@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Book from '../components/Book';
 import InputForm from '../components/InputForm';
+import NoBook from '../components/NoBook';
 import { getBooks } from '../redux/actions/books';
 
 const Books = () => {
@@ -39,9 +40,7 @@ const Books = () => {
         ))}
       </ul>
       <ul>
-        {/* Return no books text if there are no books */}
-        {books.length === 0 && <h1>No books</h1>}
-        {/* Return books if there are books */}
+        {books.length === 0 && <NoBook />}
         {books.length > 0 && filter === 'All' && books.map((book) => (
           <Book
             key={book.item_id}
@@ -62,6 +61,7 @@ const Books = () => {
             randomNum={Math.floor(Math.random() * 100)}
           />
         ))}
+        {books.length > 0 && filter !== 'All' && books.filter((book) => book.category === filter).length === 0 && <NoBook />}
       </ul>
       <h1>Add new book</h1>
       <InputForm />
