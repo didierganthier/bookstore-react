@@ -32,31 +32,31 @@ export default function InputForm() {
   };
 
   return (
-    <form>
+    <form className="flex justify-between">
       <input
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#54B4FF] focus:border-[#54B4FF] block p-2.5 w-1/4"
         type="text"
         value={book.title || ''}
-        className="input-text"
         placeholder="Title"
         name="title"
         onChange={handleInputChange}
       />
       <input
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#54B4FF] focus:border-[#54B4FF] block p-2.5 w-1/4"
         type="text"
         value={book.author || ''}
-        className="input-text"
         placeholder="Author"
         name="author"
         onChange={handleInputChange}
       />
-      <select name="category" id="categories" onChange={handleInputChange}>
+      <select name="category" id="categories" onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#54B4FF] focus:border-[#54B4FF] block w-1/4 p-2.5">
         {categories.map((category) => (
           <option key={category.id} value={category.name}>
             {category.name}
           </option>
         ))}
       </select>
-      <button type="button" onClick={saveBook}>ADD BOOK</button>
+      <button type="button" className="bg-[#54B4FF] px-5 py-2 w-1/5 text-white hover:bg-white hover:border hover:border-[#54B4FF] hover:text-[#54B4FF]" onClick={saveBook}>ADD BOOK</button>
     </form>
   );
 }

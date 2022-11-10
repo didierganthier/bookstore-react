@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Book from '../components/Book';
 import InputForm from '../components/InputForm';
+import NoBook from '../components/NoBook';
 import { getBooks } from '../redux/actions/books';
 
 const Books = () => {
@@ -22,7 +23,7 @@ const Books = () => {
   ];
 
   return (
-    <div>
+    <div className="mt-[120px] mx-[200px]">
       <ul className="filters">
         {filterOptions.map((option) => (
           <button
@@ -31,7 +32,7 @@ const Books = () => {
               setFilter(option.name);
             }}
             key={option.id}
-            style={{ backgroundColor: filter === option.name ? 'blue' : 'white', color: filter === option.name ? 'white' : 'black' }}
+            className={`${filter === option.name ? 'bg-[#54B4FF]' : 'bg-[#E8E8E8] text-black'} rounded-[10px] text-[#fff] text-[14px] font-bold py-[10px] px-[20px] mr-[10px]`}
           >
             {option.name}
 
@@ -39,9 +40,7 @@ const Books = () => {
         ))}
       </ul>
       <ul>
-        {/* Return no books text if there are no books */}
-        {books.length === 0 && <h1>No books</h1>}
-        {/* Return books if there are books */}
+        {books.length === 0 && <NoBook />}
         {books.length > 0 && filter === 'All' && books.map((book) => (
           <Book
             key={book.item_id}
@@ -49,6 +48,7 @@ const Books = () => {
             title={book.title}
             author={book.author}
             category={book.category}
+            randomNum={Math.floor(Math.random() * 100)}
           />
         ))}
         {books.length > 0 && filter !== 'All' && books.filter((book) => book.category === filter).map((book) => (
@@ -58,10 +58,13 @@ const Books = () => {
             title={book.title}
             author={book.author}
             category={book.category}
+            randomNum={Math.floor(Math.random() * 100)}
           />
         ))}
+        {books.length > 0 && filter !== 'All' && books.filter((book) => book.category === filter).length === 0 && <NoBook />}
       </ul>
-      <h1>Add new book</h1>
+      <hr className="my-10" />
+      <h1 className="text-3xl text-[#8A8A8A] font-bold uppercase mb-2">Add new book</h1>
       <InputForm />
     </div>
   );

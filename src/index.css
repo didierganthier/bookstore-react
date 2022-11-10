@@ -16,34 +16,25 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family:
-    source-code-pro,
-    Menlo,
-    Monaco,
-    Consolas,
-    'Courier New',
-    monospace;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.outer {
+  box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15), -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
 }
 
-.books {
-  display: flex;
-  flex-direction: row;
+.inner {
+  box-shadow: inset 4px 4px 6px -1px rgba(0, 0, 0, 0.2), inset -4px -4px 6px -1px rgba(255, 255, 255, 0.7), -0.5px -0.5px 0 rgba(255, 255, 255, 1), 0.5px 0.5px 0 rgba(0, 0, 0, 0.15), 0 12px 10px -10px rgba(0, 0, 0, 0.05);
 }
 
-.books li {
-  list-style: none;
-  padding-left: 20px;
-  cursor: pointer;
+circle {
+  fill: none;
+  stroke: url(#GradientColor);
 }
 
-.filters {
-  display: flex;
-  flex-direction: row;
-}
-
-.filters li {
-  list-style: none;
-  padding-left: 20px;
-  cursor: pointer;
+svg {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
