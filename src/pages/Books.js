@@ -63,7 +63,8 @@ const Books = () => {
         ))}
         {books.length > 0 && filter !== 'All' && books.filter((book) => book.category === filter).length === 0 && <NoBook />}
       </ul>
-      <h1>Add new book</h1>
+      <hr className="my-10" />
+      <h1 className="text-3xl text-[#8A8A8A] font-bold uppercase mb-2">Add new book</h1>
       <InputForm />
     </div>
   );
