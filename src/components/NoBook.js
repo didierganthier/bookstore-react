@@ -4,7 +4,7 @@ import book from '../assets/book.png';
 const NoBook = () => (
   <div className="items-center mx-auto my-20">
     <h1 className="text-3xl font-bold">No such book</h1>
-    <img src={book} className="w-[300px] h-[300px] my-5" alt="No books" />
+    <img src={book} className="w-[200px] h-[200px] my-5" alt="No books" />
     <h2 className="text-xl font-light">Please add a book</h2>
     <div className="mt-5">
       <div className="w-10 h-10 bg-[#54B4FF] rounded-full animate-bounce flex items-center justify-center outer">
